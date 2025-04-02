@@ -1,5 +1,61 @@
 import random
 
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
 word_list = [
     "python", "developer", "keyboard", "monitor", "laptop", "guitar", 
     "bicycle", "elephant", "umbrella", "chocolate", "backpack", "notebook",
@@ -10,32 +66,37 @@ word_list = [
     "waterfall", "jungle", "desert", "carousel", "fireworks", "horizon"
 ]
 
+lives = 6
+
+random_word = random.choice(word_list)
+word_len = len(random_word)
+
+display = ["_"] * word_len
+game_over = False
+
+print(" ".join(display))  
 
 
-Random_Word=random.choice(word_list)
-print(Random_Word)
-
-word_len=len(Random_Word)
-placeholder=""
-
-for letter in range(word_len): 
-    placeholder+="_ "
- 
-print(placeholder)
-
-display=""
-
-while placeholder in display:
+while not game_over:
     guess = input("\nGuess a letter: ").lower()
-    
 
-for i in Random_Word: 
-    if i == guess: 
-        display += i
-    else: 
-        display+="_ "
+  
+    for index, letter in enumerate(random_word):
+        if letter == guess:
+            display[index] = letter  
+
+    print(" ".join(display)) 
+
+if guess not in random_word:
+    lives -= 1
+    if lives == 0:
+        game_over = True
+        print("\nYou Lose! The word was:", random_word)
 
 
-print (display)
+    if "_" not in display:
+        game_over = True
+        print("\nYou win! The word was:", random_word)
 
 
+print("\n",stages[lives])
