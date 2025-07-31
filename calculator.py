@@ -19,6 +19,7 @@ def sub(n1, n2): return n1 - n2
 def mul(n1, n2): return n1 * n2
 def div(n1, n2): return n1 / n2 if n2 != 0 else "Error: Divide by zero"
 
+# Map operators
 operations = {
     "+": add,
     "-": sub,
@@ -26,28 +27,29 @@ operations = {
     "/": div
 }
 
-# Calculator function
-def calc():
-    n1 = float(input("What's the first number: "))
-    should_continue = True
+# Main calculator function
+def calculator():
+    while True:
+        n1 = float(input("What's the first number? "))
+        while True:
+            print("Available operations: +, -, *, /")
+            op = input("Pick an operation: ")
+            n2 = float(input("What's the next number? "))
 
-    while should_continue:
-        op = input("Pick an operation (+, -, *, /): ")
-        n2 = float(input("What's the next number: "))
-        
-        if op in operations:
-            result = operations[op](n1, n2)
-            print(f"{n1} {op} {n2} = {result}")
-        else:
-            print("Invalid operation. Try again.")
-            continue
+            if op in operations:
+                result = operations[op](n1, n2)
+                print(f"{n1} {op} {n2} = {result}")
+            else:
+                print("Invalid operation.")
+                continue
 
-        choice = input(f"Type 'y' to continue with {result}, or 'n' to start a new calculation: ")
+            cont = input(f"Type 'y' to continue with {result}, or 'n' to start a new calculation, or 'q' to quit: ").lower()
+            if cont == 'y':
+                n1 = result  # Continue with new result
+            elif cont == 'n':
+                break       # Break inner loop to restart
+            else:
+                print("Goodbye!")
+                return       # Exit the program
 
-        if choice.lower() == 'y':
-            n1 = result
-        else:
-            should_continue = False
-            print("\n" * 20)
-            calc()  
-calc()
+calculator()
