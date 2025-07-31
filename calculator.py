@@ -13,31 +13,41 @@ print(""" _____________________
 | |___|___|___| |___| |  '----------------'  '----------------'  '----------------'  '----------------' 
 |_____________________|\n""")
 
-def add(n1,n2):
-    return n1 + n2
+# Define operations
+def add(n1, n2): return n1 + n2
+def sub(n1, n2): return n1 - n2
+def mul(n1, n2): return n1 * n2
+def div(n1, n2): return n1 / n2 if n2 != 0 else "Error: Divide by zero"
 
-def sub(n1,n2):
-    return n1 - n2
-
-def mul(n1,n2):
-    return n1 * n2
-
-def div(n1,n2):
-    return n1 / n2
- 
 operations = {
-    "+" : add,
-    "-" : sub,
-    "*" : mul,
-    "/" : div
+    "+": add,
+    "-": sub,
+    "*": mul,
+    "/": div
 }
 
-n1 = float(input("What's the first number: "))
-op = input("select an operation (+, -, *, /) : ")
-n2 = float(input("What's the next number: "))
+# Calculator function
+def calc():
+    n1 = float(input("What's the first number: "))
+    should_continue = True
 
-if op in operations:
-    result = operations[op](n1, n2)
-    print(f"{n1} {op} {n2} = {result}")
-else:
-    print("Invalid operation.")
+    while should_continue:
+        op = input("Pick an operation (+, -, *, /): ")
+        n2 = float(input("What's the next number: "))
+        
+        if op in operations:
+            result = operations[op](n1, n2)
+            print(f"{n1} {op} {n2} = {result}")
+        else:
+            print("Invalid operation. Try again.")
+            continue
+
+        choice = input(f"Type 'y' to continue with {result}, or 'n' to start a new calculation: ")
+
+        if choice.lower() == 'y':
+            n1 = result
+        else:
+            should_continue = False
+            print("\n" * 20)
+            calc()  
+calc()
