@@ -1,8 +1,5 @@
 from art import logo
-import random 
-
-
-    
+import random     
 
 
 
@@ -23,5 +20,19 @@ else:
     print("Invalid option, Please try again.")
 
 print(f"You have {attempts} attempts left to guess.")
-user_guess = input("Make a guess: ")
+user_guess = int(input("Make a guess: "))
 
+if user_guess < random_number:
+    print("Too low. Guess again")
+elif user_guess > random_number:
+    print("Too high. Guess again")
+else:
+    print("Invalid choice. Try again.")
+
+if user_guess != random_number:
+    attempts - 1
+    print(f"You have {attempts} attempts left to guess.")
+elif user_guess == random_number:
+    print(f"You got it! The answer was {random_number}")
+else: 
+    print("")
