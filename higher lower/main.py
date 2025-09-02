@@ -7,10 +7,12 @@ from game_data import data
 
 score = 0
 should_continue = True
+account_b = random.choice(data)
+
 
 while should_continue:
 
-    account_a = random.choice(data)
+    account_a = account_b
     account_b = random.choice(data)
 
     if account_a == account_b:
